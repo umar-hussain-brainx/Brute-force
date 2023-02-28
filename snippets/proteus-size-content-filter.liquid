@@ -1,0 +1,46 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+var firstSize = $('.variant-input-wrap[name="Size"] > .variant-input > input[checked="checked"]').attr('value');
+$('.product-single__description .sizeDescription').hide();
+$('.product-single__description .sizeDescription[size="' + firstSize + '"]').show();
+
+  $('.variant-input-wrap[name="Size"] > .variant-input > label').click( function() {
+  	var selectedSize = $(this).html();
+    $('.product-single__description .sizeDescription').hide();
+	$('.product-single__description .sizeDescription[size="' + selectedSize + '"]').show();
+  });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  if (document.location.href.indexOf('variant') === -1){
+
+    // console.log("[IF AVAILABLE, SELECT] color: black -- size: athlete");
+
+    waitUntil(() => {
+      return 	document.querySelectorAll('.variant-input[data-value="Athlete | 25-75lbs"] label').length > 0;
+    }).then(() => {
+      // document.querySelector('.variant-input[data-value="Athlete | 25-75lbs"] label').click();
+    }).catch();
+
+    waitUntil(() => {
+      return 	document.querySelectorAll('.variant-input[data-value="Black"] label').length > 0;
+    }).then(() => {
+      // document.querySelector('.variant-input[data-value="Black"] label').click();
+    }).catch();
+
+   /*
+    $('.variant-input[data-value="Athlete | 25-75lbs"] label').click();
+    setTimeout(function(){ $('.variant-input[data-value="Black"] label').click();  ; }, 100);
+   */
+
+
+  }
+
+});
+
+
+
+
+</script>

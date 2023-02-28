@@ -1,0 +1,180 @@
+/* Slider */
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent; }
+
+.slick-list {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  margin: 0;
+  padding: 0; }
+  .slick-list:focus {
+    outline: none; }
+  .slick-list.dragging {
+    cursor: pointer;
+    cursor: hand; }
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+.slick-track {
+  position: relative;
+  left: 0;
+  top: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+  .slick-track:before, .slick-track:after {
+    content: "";
+    display: table; }
+  .slick-track:after {
+    clear: both; }
+  .slick-loading .slick-track {
+    visibility: hidden; }
+
+.slick-slide {
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  display: none; }
+  [dir="rtl"] .slick-slide {
+    float: right; }
+  .slick-slide img {
+    display: block; }
+  .slick-slide.slick-loading img {
+    display: none; }
+  .slick-slide.dragging img {
+    pointer-events: none; }
+  .slick-initialized .slick-slide {
+    display: block; }
+  .slick-loading .slick-slide {
+    visibility: hidden; }
+  .slick-vertical .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent; }
+
+.slick-arrow.slick-hidden {
+  display: none; }
+
+#shopify-section-product-template fieldset[name="Color"] {
+  display: flex;
+  flex-wrap: wrap; }
+  #shopify-section-product-template fieldset[name="Color"] .variant-input {
+    order: 1; }
+    #shopify-section-product-template fieldset[name="Color"] .variant-input[data-value="Grab Bag"] {
+      order: 2; }
+
+.js-hidden {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  left: -9999px; }
+
+[class*="bf04"] .js-atc-sand {
+  color: #bd2232;
+  font-weight: 900;
+  text-align: center;
+  font-size: 14px;
+  background: #fff;
+  margin: -2em 0 3em 0;
+  padding-bottom: 2em;
+  border-bottom: 1px solid #e8e8e1; }
+  [class*="bf04"] .js-atc-sand small {
+    color: #000;
+    font-weight: 400; }
+  [class*="bf04"] .js-atc-sand div {
+    max-width: 300px;
+    margin: 5px auto;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    background: #000; }
+    [class*="bf04"] .js-atc-sand div:hover {
+      background: #bd2232; }
+
+#CartDrawer .cart__item .free-filler .cart__item-sub .js-qty__wrapper {
+  display: none; }
+
+[class*="bf05"] .js-atc-sand {
+  display: none !important; }
+
+[class*="bf05"] #js-pdp-upsell {
+  text-align: left;
+  margin: 2em 0;
+  /* Customize the label (the container) */
+  /* Hide the browser's default checkbox */
+  /* Create a custom checkbox */
+  /* On mouse-over, add a grey background color */
+  /* When the checkbox is checked, add a blue background */
+  /* Create the checkmark/indicator (hidden when not checked) */
+  /* Show the checkmark when checked */
+  /* Style the checkmark/indicator */ }
+  @media (max-width: 768px) {
+    [class*="bf05"] #js-pdp-upsell {
+      text-align: center; } }
+  [class*="bf05"] #js-pdp-upsell .js-pdp-upsell--title {
+    color: #bd2232;
+    font-weight: 900;
+    font-size: 14px;
+    background: #fff;
+    padding-bottom: .5em; }
+  [class*="bf05"] #js-pdp-upsell .js-label {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  [class*="bf05"] #js-pdp-upsell .js-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0; }
+  [class*="bf05"] #js-pdp-upsell .checkmark {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee; }
+  [class*="bf05"] #js-pdp-upsell .js-label:hover input ~ .checkmark {
+    background-color: #ccc; }
+  [class*="bf05"] #js-pdp-upsell .js-label input:checked ~ .checkmark {
+    background-color: #bd2232; }
+  [class*="bf05"] #js-pdp-upsell .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none; }
+  [class*="bf05"] #js-pdp-upsell .js-label input:checked ~ .checkmark:after {
+    display: block; }
+  [class*="bf05"] #js-pdp-upsell .js-label .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg); }

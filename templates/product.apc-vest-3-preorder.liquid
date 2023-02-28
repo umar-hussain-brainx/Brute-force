@@ -1,0 +1,199 @@
+{% capture wpd_discounted_prices %}{%- render 'wcp_discount'  wcp_discount:product , wpd_is_render:'yes' -%}{% endcapture %}
+    
+    {%- capture wcp_price -%}{%- render 'wcp_render_discount' , wpd_discounted_prices:wpd_discounted_prices, price_variable:'wcp_price' -%}{%- endcapture -%}
+    {% assign  wcp_price = wcp_price | minus: 0 %}
+    
+    {%- capture wcp_compare_at_price  -%}{%- render 'wcp_render_discount', wpd_discounted_prices:wpd_discounted_prices, price_variable:'wcp_compare_at_price' -%}{%- endcapture -%}
+    {% if wcp_compare_at_price != blank %}
+        {% assign  wcp_compare_at_price = wcp_compare_at_price | minus: 0 %}
+    {% else %}
+    {% assign  wcp_compare_at_price = nil %}
+    {% endif %}
+    
+    {%- capture wcp_compare_at_price_min  -%}{%- render 'wcp_render_discount' , wpd_discounted_prices:wpd_discounted_prices, price_variable:'wcp_compare_at_price_min' -%}{%- endcapture -%}
+    {% assign  wcp_compare_at_price_min = wcp_compare_at_price_min | minus: 0 %}
+    
+    {%- capture wcp_compare_at_price_max  -%}{%- render 'wcp_render_discount', wpd_discounted_prices:wpd_discounted_prices, price_variable:'wcp_compare_at_price_max' -%}{%- endcapture -%}
+    {% assign  wcp_compare_at_price_max = wcp_compare_at_price_max | minus: 0 %}
+    
+    {%- capture wcp_price_min -%}{%- render 'wcp_render_discount' , wpd_discounted_prices:wpd_discounted_prices, price_variable:'wcp_price_min' -%}{%- endcapture -%}
+    {% assign  wcp_price_min = wcp_price_min | minus: 0 %}
+    
+    {%- capture wcp_price_max -%}{%- render 'wcp_render_discount' , wpd_discounted_prices:wpd_discounted_prices, price_variable:'wcp_price_max' -%}{%- endcapture -%}
+    {% assign  wcp_price_max = wcp_price_max | minus: 0 %}
+    
+    
+    {%- capture v_discount_tag -%}{%-render 'wcp_render_discount' , wpd_discounted_prices:wpd_discounted_prices, price_variable:'v_discount_tag'-%}{%- endcapture -%}
+    {% assign v_discount_tag = v_discount_tag | strip %}
+    
+    {%- capture p_discount_tag -%}{%- render 'wcp_render_discount' , wpd_discounted_prices:wpd_discounted_prices, price_variable:'p_discount_tag' -%}{%- endcapture -%}
+    {% assign p_discount_tag = p_discount_tag | strip %}
+    
+    {% assign raw_set_prices = product.metafields.wcp_set_prices.wcp_set_prices %}
+    {% assign set_prices_array = blank %}
+    {% if raw_set_prices %}
+        {% assign set_prices_array = raw_set_prices | split: ',' %}
+    {% endif %}
+    
+    {%- capture wcp_discount_value -%}{%- render 'wcp_render_discount' , wpd_discounted_prices:wpd_discounted_prices, price_variable:'wcp_discount_value' -%}{%- endcapture -%}
+    
+    {% capture wcp_v_discounted_prices %}{%- render 'wcp_variant' , wcp_variant:product.selected_or_first_available_variant , set_prices_array:set_prices_array , wpd_is_render:'yes', v_discount_tag : v_discount_tag , wcp_discount_value : wcp_discount_value -%}{%- endcapture -%}
+    
+    {%- capture wcp_v_price -%}{%- render 'wcp_render_discount' , wpd_discounted_prices:wcp_v_discounted_prices, price_variable:'wcp_v_price' -%}{%- endcapture -%}
+    {% assign  wcp_v_price = wcp_v_price | minus: 0 %}
+    
+    {%- capture wcp_v_compare_at_price -%}{%- render 'wcp_render_discount' , wpd_discounted_prices:wcp_v_discounted_prices, price_variable:'wcp_v_compare_at_price' -%}{%- endcapture -%}
+    {% if wcp_v_compare_at_price != blank %}
+        {% assign  wcp_v_compare_at_price = wcp_v_compare_at_price | minus: 0 %}
+    {% else %}
+    {% assign  wcp_v_compare_at_price = nil %}
+    {% endif %}
+{% section 'product-template' %}
+
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&amp;','%26'}}" data-description="{{ product.description | escape }}" data-price="{{ variant.price | money_without_currency }}" data-currency="{{ shop.currency }}"></div>
+
+{% section 'product-story-sections-vest' %}
+{% render 'junip-product-review', product: product %}
+{% section 'product-recommendations' %}
+{% section 'recently-viewed' %}
+
+{% if collection %}
+  <div class="text-center page-content page-content--bottom">
+    <a href="{% if collection.handle == 'frontpage' %}/{% else %}{{ collection.url }}{% endif %}" class="btn btn--small return-link">
+      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-arrow-left" viewBox="0 0 50 15"><path d="M50 5.38v4.25H15V15L0 7.5 15 0v5.38z"/></svg> {{ 'products.general.collection_return' | t: collection: collection.title }}
+    </a>
+  </div>
+{% endif %}
+
+<script type="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>
+
+<script type="text/javascript">
+  var _learnq = _learnq || [];
+  var classname = document.getElementsByClassName("btn btn--full add-to-cart btn--secondary");
+  var addToCart = function() {
+  _learnq.push(['track', 'Added to Cart', item]);
+  };   for (var i = 0; i < classname.length; i++) {
+  classname[i].addEventListener('click', addToCart, false);
+  }
+  </script>
+{% assign wcp_prd_var = product %}
+{% unless wcp_prd_var == empty %}
+            <script type='application/json' class='wcp_json {% for wcp_v in wcp_prd_var.variants %} wcp_json_{{wcp_v.id}} {% endfor %} wcp_json_{{ wcp_prd_var.id }}' id='wcp_json_{{ wcp_prd_var.id }}' > 
+                {% render 'wcp_product_json' with wcp_prd_var %}
+            </script>
+{% endunless %}
+
+<style>
+fieldset[name="Weight Option"] .variant-input, fieldset[name="Weight Option"] .variant-input label {
+    width: 100%;
+    text-align: center;
+  	line-height: 1.25;
+}
+
+fieldset[name="Weight Option"] .variant-input label {
+    overflow: visible;
+}
+
+fieldset[name="Weight Option"] .variant-input:nth-of-type(3) label {
+    box-shadow:0 0 0 0px lightgrey!important;
+    opacity: 0.5;
+}
+
+fieldset[name="Weight Option"] .variant-input:nth-of-type(3) input:checked + label {
+    box-shadow:0 0 0 1px black!important;
+    background: black;
+    color: white 
+}
+
+fieldset[name="Weight Option"] .variant-input:nth-of-type(2) label {
+    padding-bottom: 20px;  
+    box-shadow:0 0 0 1px black!important;
+}
+
+fieldset[name="Weight Option"] .variant-input:nth-of-type(2) input:checked + label {
+    background: black;
+    color: white;
+}
+
+fieldset[name="Weight Option"] .variant-input:nth-of-type(2) label:before {
+    content: 'Fill It Yourself Option - Max 12lbs with Sand';
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 60%;
+    bottom: 5px;
+}
+
+fieldset[name="Weight Option"] .variant-input:nth-of-type(1) label {
+    padding-bottom: 20px;  
+    box-shadow:0 0 0 1px black!important;
+}
+
+fieldset[name="Weight Option"] .variant-input:nth-of-type(1) input:checked + label {
+    background: black;
+    color: white;
+}
+
+fieldset[name="Weight Option"] .variant-input:nth-of-type(1) label:before {
+    content: 'Most Popular - Train Immediately';
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 60%;
+    bottom: 5px;
+}  
+  
+@media screen and (max-width: 768px) {
+    .variant__label {
+        text-align: left;
+    }
+    .variant__label + div > a {
+        font-size: 10px!important;
+    }
+}  
+  
+.add-to-cart {
+    padding-bottom: 18px;
+    padding-top: 18px;
+}
+
+.add-to-cart span[data-default-text="Add to Cart"]:after {
+    content: 'Now Shipping in 3-5 days!';
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    font-size: 70%;
+    bottom: 4px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 100;
+}  
+</style>

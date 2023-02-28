@@ -1,0 +1,8 @@
+{% comment %}
+  Exact same as normal product template but without unneeded markup
+  that slows down ajax loading
+{% endcomment %}
+
+{% layout none %}
+{% section 'product-template' %}
+{% render 'junip-product-review', product: product %}
