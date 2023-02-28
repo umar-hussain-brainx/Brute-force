@@ -1,3 +1,13 @@
+<style>
+@media(max-width:450px){
+ #smile-ui-lite-launcher-frame-container{
+   bottom:70px !important;
+ } 
+  .rp-micro-app-dummy-icon-container{
+    bottom:40px !important;
+  }
+}
+</style>
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
 
@@ -193,7 +203,7 @@
                       {%- endif -%}
 
                       <span data-product-price
-                        class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}">
+                        class="product__price regular_price_get {% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}">
                         {%- unless product.empty? -%}
                           {{ current_variant.price | money }}
                         {%- else -%}
@@ -329,6 +339,13 @@
                         </div>
                       {%- endunless -%}
 
+                  <div class="sticky_cart ">
+                    <div class="content page-width">
+                     <h3>{{ product.title }}</h3>
+                    <button class="btn btn--full " id="add-to-cart-sticky"><span class="sticky_price">{{ product.first_available_variant.price | money }}</span> . ADD TO CART</button>
+                    </div>
+                  </div>
+                       
                       {%- if block.settings.surface_pickup_enable -%}
                         <div data-store-availability-holder
                           data-product-name="{{ product.title | escape }}"
