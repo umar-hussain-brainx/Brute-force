@@ -1058,7 +1058,7 @@ lazySizesConfig.expFactor = 4;
       },
   
       _updateMasterSelect: function(variant) {
-        console.log('now')
+     
         let masterSelect = this.container.querySelector(this.originalSelectorId);
         if (!masterSelect) return;
      
@@ -8510,27 +8510,6 @@ lazySizesConfig.expFactor = 4;
     }
     // sticky_cart end
 
-  // collection page scroll
-
-   // let element_all= document.getElementsByClassName("scroll_btn");
-   //  for (let i = 0; i < element_all.length; i++) {
-   //    element_all[i].addEventListener('click', function(e) {
-   //       let href_val = this.getAttribute('href');
-   //       let has_hash = href_val.includes('#');
-        
-   //       if( has_hash == true){
-   //          e.preventDefault();
-   //         let remove_hash = href_val.replace('#','');
-   //         let selector = document.getElementById(''+remove_hash+'');
-    
-   //          selector.scrollIntoView();
-
-   //       }
-        
-   //    });
-   //  }
-
-  // collection page scroll
 
   });
 
