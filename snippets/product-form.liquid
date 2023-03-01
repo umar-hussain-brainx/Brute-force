@@ -27,7 +27,7 @@
       {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
       name="add"
       data-add-to-cart
-      class="btn btn--full add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
+     id="product_addToCart" class="btn btn--full add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
       {% unless current_variant.available %} disabled="disabled"{% endunless %}>
       <span data-add-to-cart-text data-default-text="{{ default_text }}">
         {{ button_text }}
@@ -44,7 +44,7 @@
 
   <div class="shopify-payment-terms product__policies">{{ form | payment_terms }}</div>
 
-  <select name="id" data-product-select class="product-single__variants no-js">
+  <select name="id" data-product-select id="single_select_option" class="product-single__variants no-js">
     {%- for variant in product.variants -%}
       {%- if variant.available -%}
         <option {% if variant == product.selected_or_first_available_variant %}

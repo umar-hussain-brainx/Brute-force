@@ -1058,9 +1058,10 @@ lazySizesConfig.expFactor = 4;
       },
   
       _updateMasterSelect: function(variant) {
+     
         let masterSelect = this.container.querySelector(this.originalSelectorId);
         if (!masterSelect) return;
-  
+     
         masterSelect.value = variant.id;
         // Force a change event so Shop Pay installments works after a variant is changed
         masterSelect.dispatchEvent(new Event('change', { bubbles: true }));
@@ -7242,7 +7243,7 @@ lazySizesConfig.expFactor = 4;
         this.container.on('variantImageChange' + this.settings.namespace, this.updateVariantImage.bind(this));
         this.container.on('variantPriceChange' + this.settings.namespace, this.updatePrice.bind(this));
         this.container.on('variantUnitPriceChange' + this.settings.namespace, this.updateUnitPrice.bind(this));
-  
+
         if (this.container.querySelector(this.selectors.sku)) {
           this.container.on('variantSKUChange' + this.settings.namespace, this.updateSku.bind(this));
         }
@@ -7252,6 +7253,7 @@ lazySizesConfig.expFactor = 4;
           this.settings.inventory = true;
           this.settings.inventoryThreshold = inventoryEl.dataset.threshold;
           this.container.on('variantChange' + this.settings.namespace, this.updateInventory.bind(this));
+
         }
   
         // Update individual variant availability on each selection
@@ -8471,6 +8473,44 @@ lazySizesConfig.expFactor = 4;
     }
 
     document.dispatchEvent(new CustomEvent('page:loaded'));
+    
+
+    
+ // sticky_cart start
+    if (document.getElementsByClassName("regular_price_get").length > 0){
+      let get_price = document.getElementsByClassName('regular_price_get')[0].innerText; 
+      document.getElementsByClassName('sticky_price')[0].innerText = get_price; 
+      document.getElementById('single_select_option').addEventListener('change', function() {
+      setTimeout(function() {
+        let get_price = document.getElementsByClassName('regular_price_get')[0].innerText; 
+        console.log('You selected: ', get_price);
+        document.getElementsByClassName('sticky_price')[0].innerText = get_price;   
+      },200);
+      });
+      document.getElementById('add-to-cart-sticky').addEventListener('click', function() {
+        document.getElementById('product_addToCart').click();
+      });
+
+  
+    let sticky_btn_element =   document.getElementsByClassName('sticky_cart')[0];
+    let myElement = document.getElementById('product_addToCart');
+    let bounding = myElement.getBoundingClientRect();
+    function elementInViewport() {
+    let bounding = myElement.getBoundingClientRect();
+      if (bounding.top >= 0 && bounding.left >= 0 && bounding.right <= (window.innerWidth || document.documentElement.clientWidth) && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
+         sticky_btn_element.style.display = 'none';
+      } else {
+         sticky_btn_element.style.display = 'block';
+      }
+    }
+
+    window.onscroll = () => {
+     elementInViewport()
+    }
+    }
+    // sticky_cart end
+
+
   });
 
 })();
